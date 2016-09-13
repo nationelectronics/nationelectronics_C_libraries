@@ -24,23 +24,21 @@
 
 int main(int argc, char **argv){
 
-	IOPE_init(0x20); // initialise one of the io pi buses on i2c address 0x20, default address for chip 1
+   iope_init(0x20); // initialise one of the io pi buses on i2c address 0x20, default address for chip 1
 
-	set_port_direction(0x20,PORTA, 0xFF); // set port A to be inputs
-	set_port_direction(0x20,PORTB, 0xFF); // set port B to be inputs
-	set_port_pullups(0x20, PORTA, 0xFF);  // enable internal pullups for port A
-	invert_port(0x20,PORTA,0xFF);         // invert output so port A will read as 0
-	set_port_pullups(0x20, PORTB, 0xFF);  // enable internal pullups for port B
-	invert_port(0x20,PORTB,0xFF);         // invert output so port B will read as 0
+   set_port_direction(0x20,PORTA, 0xFF); // set port A to be inputs
+   set_port_direction(0x20,PORTB, 0xFF); // set port B to be inputs
+   set_port_pullups(0x20, PORTA, 0xFF);  // enable internal pullups for port A
+   invert_port(0x20,PORTA,0xFF);         // invert output so port A will read as 0
+   set_port_pullups(0x20, PORTB, 0xFF);  // enable internal pullups for port B
+   invert_port(0x20,PORTB,0xFF);         // invert output so port B will read as 0
 
+   while (1){
+      system("clear");
+      printf("Port A %i \n", read_port(0x20,PORTA)); // grounding a pins will change the value
+      printf("Port B %i \n", read_port(0x20,PORTB)); // grounding a pins will change the value
+      usleep(500000); // sleep 0.5 seconds
+   }
 
-	while (1){
-        system("clear");
-        clearscreen();
-		printf("Port A %x \n", read_port(0x20,PORTA)); // grounding a pins will change the value
-        printf("Port B %x \n", read_port(0x20,PORTB)); // grounding a pins will change the value
-		usleep(500000); // sleep 0.5 seconds
-	}
-
-	return (0);
+   return (0);
 }
