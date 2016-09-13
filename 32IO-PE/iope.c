@@ -1,6 +1,6 @@
 /*
  ================================================
- Raspberry Pi HAT - 32-IO Port Expander
+ Raspberry Pi HAT - 32-IO Port Expander Library
  Version 1.1 Created 10/06/2015
  ================================================
 
@@ -15,9 +15,10 @@
  address2(chip2) --> PortA --> Pin0 to Pin7
                  --> PortB --> Pin0 to Pin7
 
-                 
- Required package{
+
+ Required package:
  apt-get install libi2c-dev
+
  */
 
 #include <stdio.h>

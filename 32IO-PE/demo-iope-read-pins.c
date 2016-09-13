@@ -30,9 +30,9 @@ int main(int argc, char **argv){
    set_port_direction(0x20,PORTA, 0xFF); // set port A to be inputs
    set_port_direction(0x20,PORTB, 0xFF); // set port B to be inputs
    set_port_pullups(0x20, PORTA, 0xFF);  // enable internal pullups for port A
-   invert_port(0x20,PORTA,0xFF);         // invert output so port A will read as 0
+   invert_port(0x20,PORTA,0xFF);         // invert output so port A will read logical 1 when grounded
    set_port_pullups(0x20, PORTB, 0xFF);  // enable internal pullups for port B
-   invert_port(0x20,PORTB,0xFF);         // invert output so port B will read as 0
+   invert_port(0x20,PORTB,0xFF);         // invert output so port B will read logical 1 when grounded
 
 
    while (1){

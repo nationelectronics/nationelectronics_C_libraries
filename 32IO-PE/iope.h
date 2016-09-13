@@ -1,7 +1,9 @@
 /*
- * iope.h
+ *  iope.h
  *
+ *  Raspberry HAT - 32 I/O Ports Expander Library
  *  Created on: 10/06/2015
+ * 
  */
 
 

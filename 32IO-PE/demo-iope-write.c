@@ -28,9 +28,9 @@ int main(int argc, char **argv){
    set_port_direction(0x20, PORTB, 0x00); // set the direction for port B to be outputs
 
    set_port_pullups(0x20, PORTA, 0);     // disable internal pullups for port A
-   invert_port(0x20,PORTA,0);            // set output to 0 so port A will read as 1
-   set_port_pullups(0x20, PORTA, 0);     // disable internal pullups for port A
-   invert_port(0x20,PORTA,0);            // set output to 0 so port A will read as 1
+   invert_port(0x20,PORTA,0);            // set output to normal so port A will read logical 0 when grounded
+   set_port_pullups(0x20, PORTB, 0);     // disable internal pullups for port B
+   invert_port(0x20,PORTB,0);            // set output to normal so port B will read logical 0 when grounded
 
    write_port(0x20, PORTA, 0);           // turn port A off
    write_port(0x20, PORTB, 0);           // turn port B off

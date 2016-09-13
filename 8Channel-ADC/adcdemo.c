@@ -1,10 +1,14 @@
-// Microchip MCP3208 ADC C demo
-// 
-// compile:
-// gcc -lwiringPi -o adcdemo adcdemo.c
-// 
-//
-//
+/*
+ *  C demo code for:
+ *  Raspberry Pi HAT - 8 Channel ADC V1.1
+ *  Microchip MCP3208 chip
+ *
+ *  compile:
+ *  gcc -lwiringPi -o adcdemo adcdemo.c
+ *
+ *
+ */
+
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <stdlib.h>
@@ -70,20 +74,20 @@ int main(int argc, char **argv){
   int    errno;
   double realResult;
   double vref = 5.0; // jumper selected: 5.0 (default), 3.3, 1.0, or 0.3 Volts
-  
+
   if (wiringPiSPISetup (chip, 200000) < 0){
      fprintf (stderr, "SPI Setup failed: %s\n", strerror (errno));
-  }else{
-     printf("SPI ok\n");
+     exit(1);
   }
+
   while (1) {
      system("clear");
-     for (channel=0;channel<8;channel++){
-       result = readADCChannel(chip,channel); // from 0 to 4095
-       realResult = (double)result/(double)4095*vref;
-       fprintf(stdout,"chn: %i result: %f V = %i\n",channel,realResult,result);
+     for (channel = 0; channel < 8; channel++) {
+       result = readADCChannel( chip, channel); // from 0 to 4095
+       realResult = (double)result / (double)4095 * vref;
+       fprintf(stdout,"chn: %i result: %f V = %i\n", channel, realResult, result);
      }
-     usleep(1000000);
+     usleep(1000000); //wait for one second
   }
   return;
 }
