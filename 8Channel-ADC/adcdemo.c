@@ -6,7 +6,7 @@
  *  compile:
  *  gcc -lwiringPi -o adcdemo adcdemo.c
  *
- *
+ *  Updated 10/30/2016
  */
 
 #include <stdio.h>
@@ -16,55 +16,20 @@
 #include <wiringPi.h>
 #include <wiringPiSPI.h>
 
-double readADCChannel(chip, channel){
+  /* channel 0..7 */
+int readADCChannel(chip, channel){
   unsigned char cntrlStack[3];
   unsigned char tmp;
   uint result;
-  double realResult;
+
   /* figure 6-1 of MCP3208 datasheet */
-  switch(channel){
-  case 0:
-    cntrlStack[0] = 0b00000110;
-    cntrlStack[1] = 0b00000000;
-    break;
-  case 1:
-    cntrlStack[0] = 0b00000110;
-    cntrlStack[1] = 0b01000000;
-    break;
-  case 2:
-    cntrlStack[0] = 0b00000110;
-    cntrlStack[1] = 0b10000000;
-    break;
-  case 3:
-    cntrlStack[0] = 0b00000110;
-    cntrlStack[1] = 0b11000000;
-    break;
-  case 4:
-    cntrlStack[0] = 0b00000111;
-    cntrlStack[1] = 0b00000000;
-    break;
-  case 5:
-    cntrlStack[0] = 0b00000111;
-    cntrlStack[1] = 0b01000000;
-    break;
-  case 6:
-    cntrlStack[0] = 0b00000111;
-    cntrlStack[1] = 0b10000000;
-    break;
-  case 7:
-    cntrlStack[0] = 0b00000111;
-    cntrlStack[1] = 0b11000000;
-    break;
-  }
-  cntrlStack[2] = 0b00000000;
+  cntrlStack[0] = 6 + ((channel & 4) >> 2);
+  cntrlStack[1] = (channel & 3) << 6;
+  cntrlStack[2] = 0;
 
   wiringPiSPIDataRW (chip, cntrlStack, 3);
 
-  tmp=(cntrlStack[1]<<4);
-  result=(uint)tmp;
-  result=(result<<4);
-  result=result + (uint)cntrlStack[2];
-  return result;
+  return ((cntrlStack[1] & 15) << 8) + cntrlStack[2];
 }
 
 int main(int argc, char **argv){
@@ -84,10 +49,10 @@ int main(int argc, char **argv){
      system("clear");
      for (channel = 0; channel < 8; channel++) {
        result = readADCChannel( chip, channel); // from 0 to 4095
-       realResult = (double)result / (double)4095 * vref;
+       realResult = (double)result / (double)4095 * vref; // from 0 to Vref
        fprintf(stdout,"chn: %i result: %f V = %i\n", channel, realResult, result);
      }
-     usleep(1000000); //wait for one second
+     usleep(2000000); //wait for two second
   }
   return;
 }
