@@ -14,7 +14,7 @@ This library reads input values from the [Raspberry PI HAT - 8 Channel ADC V1.1]
 
 
 ###32IO-PE
-This library reads and writes to the [Raspberry PI HAT - 32 I/O Ports Expander V1.1](http://nationelectronics.com/raspberry-pi-extensions/1-raspberry-pi-hat-32-io-ports-expander-v11-0648260628192.html "Raspberry PI HAT - 32 I/O Ports Expander V1.1") or [Raspberry PI HAT - 32 I/O Ports Expander V1.1](http://www.nationelectronics.com/raspberry-pi-extensions/174-raspberry-pi-hat-32-io-port-expander-v11-mcp23017-i2c-black-0648260628239.html "Raspberry PI HAT - 32 I/O Ports Expander V1.1 Black").
+This library reads and writes to the [Raspberry PI HAT - 32 I/O Ports Expander V1.1](http://nationelectronics.com/raspberry-pi-extensions/1-raspberry-pi-hat-32-io-ports-expander-v11-0648260628192.html "Raspberry PI HAT - 32 I/O Ports Expander V1.1") or [Raspberry PI HAT - 32 I/O Ports Expander V1.1 Black](http://www.nationelectronics.com/raspberry-pi-extensions/174-raspberry-pi-hat-32-io-port-expander-v11-mcp23017-i2c-black-0648260628239.html "Raspberry PI HAT - 32 I/O Ports Expander V1.1 Black").
 
 
 We will be adding further C demos in the future for our boards.
