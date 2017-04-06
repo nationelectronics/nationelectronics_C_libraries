@@ -9,7 +9,7 @@
  *  run:
  *  ./speedtest
  *
- *  Updated 01/28/2017
+ *  Updated 04/06/2017
  */
 
 #include <stdio.h>
@@ -39,20 +39,24 @@ int main(int argc, char **argv){
   int    result;
   int    errno;
 
-  if (wiringPiSPISetup (chip, 32000000) < 0){
+  if (wiringPiSPISetup (chip, 32000000) < 0){  //this is the maximus Hz, you can down this number if the reading become unstable due to noise.
      fprintf (stderr, "SPI Setup failed: %s\n", strerror (errno));
      exit(1);
   }
   clock_t begin = clock();
   int i=0;
-  while (i<100000) {  //read the channel 0, 100000 times
+  int num=1000000;
+  while (i<num) {  //read the channel 0, num times
      i++;
      result = readADCChannel( chip, 0);
   }
   clock_t end = clock();
   double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+  double ksps = (double) num / time_spent / 1000;
 
-  fprintf(stdout,"\n\ntime: %8.6f seconds\n\n", time_spent); // on RPI3 should be less than a second, so, it read at more than 100ksps
+  fprintf(stdout,"\n\nSampled: %i samples", num); 
+  fprintf(stdout,"\n\nTime: %8.6f seconds", time_spent);
+  fprintf(stdout,"\n\nSpeed: %8.6f ksps\n\n", ksps); 
 
   return;
 }
