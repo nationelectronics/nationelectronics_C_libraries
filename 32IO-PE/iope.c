@@ -235,9 +235,9 @@ void write_pin(char address, char port, char pin, char value) {
     */
    port=(port)?GPIOB:GPIOA; 
    char cval = 0;
-   cval = read_byte_data(address, GPIOA);
+   cval = read_byte_data(address, port);
    cval = updatebyte(cval, pin, value);
-   write_byte_data(address, GPIOA, cval);
+   write_byte_data(address, port, cval);
 }
 
 void write_port(char address, char port, char value) {
